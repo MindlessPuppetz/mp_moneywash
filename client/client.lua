@@ -10,7 +10,7 @@ RegisterNetEvent('mp_moneywash:client:openMenu', function()
 	end
 	if markedAmount >= 100 then
 		local tax = ((OnJob(job) or InGang(gang)) and 0.0 or Config.Fee)
-		local input = lib.inputDialog('Sable\'s Laundry', {
+		local input = lib.inputDialog(Config.Name, {
 			{type = 'number', label = 'Money Wash ('.. math.floor(tax * 100) ..'% Fee)', default = markedAmount, description = 'Amount to be washed:', icon = 'fas fa-dollar-sign', required = true, min = 100, max = markedAmount, step = 1},
 		})
 	
@@ -30,19 +30,19 @@ RegisterNetEvent('mp_moneywash:client:openMenu', function()
 			end
 			Core.Functions.Notify("Washing will take ".. duration .." seconds to complete. Press X to cancel.", "info", 10000)
 			if lib.progressCircle({
-				duration = duration * 1000,
-				position = 'bottom',
+				duration     = duration * 1000,
+				position     = 'bottom',
 				useWhileDead = false,
 				allowRagdoll = false,
-				allowCuffed = false,
-				canCancel = true,
+				allowCuffed  = false,
+				canCancel    = true,
 				anim = {
-					dict = 'mini@repair',
-					clip = 'fixing_a_player'
+					dict     = 'mini@repair',
+					clip     = 'fixing_a_player'
 				},
 				disable = {
-					combat = true,
-					move = true,
+					combat   = true,
+					move     = true,
 				},
 			}) then TriggerServerEvent('mp_moneywash:withdraw', input[1], tax) end
 		end
@@ -52,21 +52,40 @@ RegisterNetEvent('mp_moneywash:client:openMenu', function()
 end)
 
 -- Render Zones
-for k,v in pairs(Config.WASH) do
-	exports['qb-target']:AddBoxZone('Money_Wash'..k, v.coords, v.length, v.width, {
-		name=v.name,
-		debugPoly=Config.Debug,
-		heading=v.heading,
-		minZ=v.minz,
-		maxZ=v.maxz,
-		}, {
-			options = {
+if Config.Target == 'qb' then
+    for k,v in pairs(Config.WASH) do
+        exports['qb-target']:AddBoxZone('Money_Wash'..k, v.coords, v.length, v.width, {
+            name      = v.name,
+            debugPoly = Config.Debug,
+            heading   = v.heading,
+            minZ      = v.minz,
+            maxZ      = v.maxz,
+            }, {
+            options   = {
+                {
+                    event = "mp_moneywash:client:openMenu",
+                    icon  = "fas fa-washing-machine",
+                    label = Lang['open_wash'],
+                },
+            },
+            distance   = v.dist
+        })
+    end
+elseif Config.Target == 'ox' then
+    for k,v in pairs(Config.WASH) do
+		exports.ox_target:addBoxZone({
+			coords    = v.coords,
+			size      = vec3(v.length, v.width, 2),
+			rotation  = v.heading,
+			debug     = Config.Debug,
+			options   = {
 				{
 					event = "mp_moneywash:client:openMenu",
-					icon = "fas fa-washing-machine",
+					icon  = "fas fa-washing-machine",
 					label = Lang['open_wash'],
 				},
 			},
-	distance = v.dist
-	})
+			distance  = v.dist
+		})
+    end
 end

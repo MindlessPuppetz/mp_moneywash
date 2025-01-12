@@ -1,10 +1,30 @@
 Config = {}
-Config.Core = "qb-core"                 -- change to your core name
-Config.Webhook = "CHANGE ME"            -- change to your discord webhook
-Config.Debug = false                    -- debug polyzones
+Config.Core     = "qb-core"             -- change to your core name
+Config.Target   = "qb"                  -- change to your target name (supports "qb" or "ox")
+Config.Webhook  = "CHANGE ME"           -- change to your discord webhook
+Config.Debug    = false                 -- debug polyzones
+Config.Name     = "Sable's Laundry"     -- Name of laundromat
 Config.WASH = {                         -- Can support multiple locations.
-    { name = "laundry1", coords = vector3(1122.373, -3193.474, -41.40308), length = 2.0, width = 2.0, heading = 0.0, minz = -41.0, maxz = -39.0, dist = 2.0},
-	--{ name = "laundry2", coords = vector3(-1868.48, 2065.24, 134.43), length = 1.5, width = 1.5, heading = 0.0, minz = -36.0, maxz = -38.0, dist = 2.0},
+    { 
+        name    = "laundry1",
+        coords  = vector3(0.0, 0.0, 0.0),
+        length  = 2.0,
+        width   = 2.0,
+        heading = 0.0,
+        minz    = -41.0,
+        maxz    = -39.0,
+        dist    = 2.0,
+    },
+	--{
+    --     name    = "laundry2",
+    --     coords  = vector3(-1868.48, 2065.24, 134.43),
+    --     length  = 1.5,
+    --     width   = 1.5,
+    --     heading = 0.0,
+    --     minz    = -36.0,
+    --     maxz    = -38.0,
+    --     dist    = 2.0,
+    -- },
 }
 
 Config.Fee = 0.50                       -- 0.30 = 30%
@@ -22,8 +42,8 @@ Config.ProgressBar = {
 
 Config.Gangs = {
   'mafia',
-  'reaper',
-  'ltc',
+  'vagos',
+  'ballas',
 }
 
 Config.Jobs = {

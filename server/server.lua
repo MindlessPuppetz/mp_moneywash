@@ -4,8 +4,6 @@ RegisterServerEvent('mp_moneywash:withdraw')
 AddEventHandler('mp_moneywash:withdraw', function(input, tax)
 	local src = source
     local Player = Core.Functions.GetPlayer(src)
-	local gang = Player.PlayerData.gang.name
-	local job = Player.PlayerData.job.name
 	local markedAmount = 0
 	for k,v in pairs(Player.PlayerData.items) do
 		if v.name == Config.BlackMoneyItem then markedAmount = markedAmount + v.amount end
@@ -24,23 +22,23 @@ end)
 
 Discord = {
     ['webhook'] = Config.Webhook,
-    ['name'] = 'Money Wash',
-    ['image'] = "https://CHANGEME.com/laundry_icon.png"
+    ['name']    = 'Money Wash',
+    ['image']   = "https://CHANGEME.com/laundry_icon.png"
 }
 
 function DiscordLog(name, deposit, receive)
     local embed = {
         {
-            ["color"] = 04255,
-            ["title"] = "**Money Washed:**",
-            ["description"] = "Deposited: $".. deposit ..". Received: $".. receive,
-            ["url"] = "",
+            ["color"]        = 04255,
+            ["title"]        = "**Money Washed:**",
+            ["description"]  = "Deposited: $".. deposit ..". Received: $".. receive,
+            ["url"]          = "",
             ["footer"] = {
-            ["text"] = "Washed by: "..name,
-            ["icon_url"] = ""
-        },
+                ["text"]     = "Washed by: "..name,
+                ["icon_url"] = ""
+            },
             ["thumbnail"] = {
-                ["url"] = "",
+                ["url"]      = "",
             },
 		}
 	}
