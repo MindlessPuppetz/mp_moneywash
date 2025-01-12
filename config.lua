@@ -1,10 +1,12 @@
 Config = {}
-Config.Core     = "qb-core"             -- change to your core name
-Config.Target   = "qb"                  -- change to your target name (supports "qb" or "ox")
-Config.Webhook  = "CHANGE ME"           -- change to your discord webhook
-Config.Debug    = false                 -- debug polyzones
-Config.Name     = "Sable's Laundry"     -- Name of laundromat
-Config.WASH = {                         -- Can support multiple locations.
+Config.Core     = "qb-core"                                 -- change to your core name
+Config.Target   = "qb"                                      -- change to your target name (supports "qb" or "ox")
+Config.Inventory= "qb"                                      -- change to your inventory name (supports "qb" with money being digital, and "ox" with money being physical)
+Config.Webhook  = "CHANGE ME"                               -- change to your discord webhook
+Config.WHImage  = "https://changeme.com/money_image.png"    -- change to your discord webhook image (URL)
+Config.Debug    = false                                     -- debug polyzones
+Config.Name     = "Sable's Laundry"                         -- Name of laundromat
+Config.WASH = {                                             -- Can support multiple locations.
     { 
         name    = "laundry1",
         coords  = vector3(0.0, 0.0, 0.0),
@@ -29,6 +31,7 @@ Config.WASH = {                         -- Can support multiple locations.
 
 Config.Fee = 0.50                       -- 0.30 = 30%
 Config.BlackMoneyItem = "markedbills"   -- name of black money
+Config.MoneyItem = "money"              -- name of clean money item (only used with ox_inventory)
 
 Config.ProgressBar = {
   Duration = 30,                        -- minimum timer amount in seconds

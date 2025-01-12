@@ -8,13 +8,17 @@ AddEventHandler('mp_moneywash:withdraw', function(input, tax)
 	for k,v in pairs(Player.PlayerData.items) do
 		if v.name == Config.BlackMoneyItem then markedAmount = markedAmount + v.amount end
 	end
-	if (markedAmount >= input) and input >= 100 then
-		Player.Functions.RemoveItem(Config.BlackMoneyItem, input)
-		local newAmount = input - (input * tax)
-		Player.Functions.AddMoney("cash", newAmount, "Money-Wash")
-		Core.Functions.Notify(src, "You received $".. newAmount .." in clean laundry." , "success")
-		local creator = Player.PlayerData.charinfo.firstname..' '..Player.PlayerData.charinfo.lastname .."("..Player.PlayerData.source..")["..Player.PlayerData.citizenid.."]"
-		DiscordLog(creator, input, newAmount)
+    if (markedAmount >= input) and input >= 100 then
+        Player.Functions.RemoveItem(Config.BlackMoneyItem, input)
+        local newAmount = input - (input * tax)
+        if Config.Inventory == "qb-core" then
+            Player.Functions.AddMoney("cash", newAmount, "Money-Wash")
+        elseif Config.Inventory == "ox_inventory" then
+            Player.Functions.AddItem(Config.MoneyItem, newAmount)
+        end
+        Core.Functions.Notify(src, "You received $".. newAmount .." in clean laundry." , "success")
+        local creator = Player.PlayerData.charinfo.firstname..' '..Player.PlayerData.charinfo.lastname .."("..Player.PlayerData.source..")["..Player.PlayerData.citizenid.."]"
+        DiscordLog(creator, input, newAmount)
 	else
 		Core.Functions.Notify(src, "You don't seem to have the required amount of laundry you are trying to wash.", "error")
 	end
@@ -23,7 +27,7 @@ end)
 Discord = {
     ['webhook'] = Config.Webhook,
     ['name']    = 'Money Wash',
-    ['image']   = "https://CHANGEME.com/laundry_icon.png"
+    ['image']   = Config.WHImage,
 }
 
 function DiscordLog(name, deposit, receive)
