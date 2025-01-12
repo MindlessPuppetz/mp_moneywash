@@ -19,7 +19,7 @@ Config.WASH = {                                             -- Can support multi
     },
 	--{
     --     name    = "laundry2",
-    --     coords  = vector3(-1868.48, 2065.24, 134.43),
+    --     coords  = vector3(0.0, 0.0, 0.0),
     --     length  = 1.5,
     --     width   = 1.5,
     --     heading = 0.0,
