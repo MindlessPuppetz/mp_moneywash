@@ -5,15 +5,23 @@ AddEventHandler('mp_moneywash:withdraw', function(input, tax)
 	local src = source
     local Player = Core.Functions.GetPlayer(src)
 	local markedAmount = 0
-	for k,v in pairs(Player.PlayerData.items) do
-		if v.name == Config.BlackMoneyItem then markedAmount = markedAmount + v.amount end
-	end
+
+    if Config.Inventory  == 'ox' then
+        local items = exports.ox_inventory:Search('count', Config.BlackMoneyItem)
+        markedAmount = items or 0
+    elseif Config.Inventory == 'qb' then
+        local items = PlayerData.items
+        for k,v in pairs(items) do
+            if v.name == Config.BlackMoneyItem then markedAmount = markedAmount + v.amount end
+        end
+    end
+
     if (markedAmount >= input) and input >= 100 then
         Player.Functions.RemoveItem(Config.BlackMoneyItem, input)
         local newAmount = input - (input * tax)
-        if Config.Inventory == "qb-core" then
+        if Config.Inventory == "qb" then
             Player.Functions.AddMoney("cash", newAmount, "Money-Wash")
-        elseif Config.Inventory == "ox_inventory" then
+        elseif Config.Inventory == "ox" then
             Player.Functions.AddItem(Config.MoneyItem, newAmount)
         end
         Core.Functions.Notify(src, "You received $".. newAmount .." in clean laundry." , "success")

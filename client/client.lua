@@ -5,9 +5,17 @@ RegisterNetEvent('mp_moneywash:client:openMenu', function()
 	local gang = PlayerData.gang.name
 	local job = PlayerData.job.name
 	local markedAmount = 0
-	for k,v in pairs(PlayerData.items) do
-		if v.name == Config.BlackMoneyItem then markedAmount = markedAmount + v.amount end
-	end
+
+    if Config.Inventory  == 'ox' then
+        local items = exports.ox_inventory:Search('count', Config.BlackMoneyItem)
+        markedAmount = items or 0
+    elseif Config.Inventory == 'qb' then
+        local items = PlayerData.items
+        for k,v in pairs(items) do
+            if v.name == Config.BlackMoneyItem then markedAmount = markedAmount + v.amount end
+        end
+    end
+
 	if markedAmount >= 100 then
 		local tax = ((OnJob(job) or InGang(gang)) and 0.0 or Config.Fee)
 		local input = lib.inputDialog(Config.Name, {
