@@ -16,7 +16,7 @@ RegisterNetEvent('mp_moneywash:client:openMenu', function()
         end
     end
 
-	if markedAmount >= 100 then
+	if markedAmount >= Config.Minimum then
 		local tax = ((OnJob(job) or InGang(gang)) and 0.0 or Config.Fee)
 		local input = lib.inputDialog(Config.Name, {
 			{type = 'number', label = 'Money Wash ('.. math.floor(tax * 100) ..'% Fee)', default = markedAmount, description = 'Amount to be washed:', icon = 'fas fa-dollar-sign', required = true, min = 100, max = markedAmount, step = 1},
