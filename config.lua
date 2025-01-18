@@ -32,6 +32,7 @@ Config.WASH = {                                             -- Can support multi
 Config.Fee = 0.50                       -- 0.30 = 30%
 Config.BlackMoneyItem = "markedbills"   -- name of black money
 Config.MoneyItem = "money"              -- name of clean money item (only used with ox_inventory)
+Config.Minimum = 100                    -- minimum amount to wash
 
 Config.ProgressBar = {
   Duration = 30,                        -- minimum timer amount in seconds
