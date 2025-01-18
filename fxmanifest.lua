@@ -4,7 +4,7 @@ lua54 'yes'
 
 description 'Free, open source money wash'
 author 'MindlessPuppetz'
-version '1.2'
+version '1.3'
 
 shared_scripts {
     '@ox_lib/init.lua',
